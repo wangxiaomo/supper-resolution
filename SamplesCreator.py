@@ -13,9 +13,9 @@ import Camera
 
 def stub(input_image):
     logging.basicConfig(level=logging.INFO)
-    
+
     config = myconfig.config
-    
+
     if not os.path.exists(config['samples_folder']):
         os.mkdir(config['samples_folder'])
 
