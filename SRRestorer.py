@@ -114,6 +114,7 @@ def stub():
     high_res_size  = [int(input_images[0][1].size[1] * scale), int(input_images[0][1].size[0] * scale), 3]
     high_res_image = numpy.zeros(high_res_size).astype(numpy.float32)
     for (offset, LR_img) in input_images:
+        dx, dy = offset
         HR_arr = numpy.asarray(LR_img.resize((high_res_size[1],high_res_size[0]), Image.ANTIALIAS))
         dx,dy = offset
         high_res_image += numpy.dstack((camera.doOffset(HR_arr[:,:,0],(-dx,-dy)),
@@ -128,8 +129,7 @@ def stub():
         error /=  float(high_res_image.size[0] * high_res_image.size[1])
         logging.info('iteration: %2d, estimation error: %3f' % (i, error))
 
-    # save final reconstructed image
-    high_res_image.save('%s/Reconstructed.png' % (config['output_folder']))
+    high_res_image.save('%s/reconstructed.png' % (config['output_folder']))
 
 
 if __name__=="__main__":
